@@ -87,12 +87,55 @@ window.addEventListener('DOMContentLoaded', () => {
       minutes.innerHTML = getZero(t.minutes);
       seconds.innerHTML = getZero(t.seconds);
 
-      if (i.total <= 0) {
+      if (t.total <= 0) {
         clearInterval(timeInterval);
       }
     }
   }
 
   setClock('.timer', deadline);
+
+  // Modal 
+
+  const modalTrigger = document.querySelectorAll('[data-modal]'),
+        modal = document.querySelector('.modal');
+        modalCloseBtn = document.querySelector('[data-close]');
+
+  modalTrigger.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // первый способ
+      modal.classList.add('show');
+      modal.classList.remove('hide');
+  
+      //второй способо показа модального окна через toggle
+      // modal.classList.toggle('show');
+  
+      // фиксируем страницу, чтобы нельзя было скролить ее
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  function closeModal() {
+      // первый способ
+      modal.classList.add('hide');
+      modal.classList.remove('show');
+        //второй способо показа модального окна через toggle
+      // modal.classList.toggle('show');
+      document.body.style.overflow = ''; // пустые кавычки, браузер подставляет значение по умолчанию
+  }
+
+  modalCloseBtn.addEventListener('click', closeModal);
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      closeModal(); 
+    }
+  })
+
+  document.addEventListener('keydown', (e) => {
+    if (e.code === "Escape" && modal.classList.contains('show')){
+      closeModal();
+    }
+  });
 
 });
