@@ -247,7 +247,7 @@ window.addEventListener('DOMContentLoaded', () => {
       `;
       // form.append(statusMessage); - не применяем, потому что ломает верстку
       form.insertAdjacentElement('afterend', statusMessage);
-      
+
       const formData = new FormData(form);
 
       const object = {};
@@ -296,6 +296,5 @@ window.addEventListener('DOMContentLoaded', () => {
       prevModalDialog.classList.remove('hide');
       closeModal();
     }, 4000);
-  } 
-
+  }
 });
